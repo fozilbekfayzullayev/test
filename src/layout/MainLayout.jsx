@@ -1,4 +1,3 @@
-import React, { Suspense } from "react";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar/Navbar";
 import Footer from "../components/Footer";
@@ -8,9 +7,7 @@ const MainLayout = () => {
     <div className="main-layout">
       <Navbar />
       <main>
-        <Suspense fallback={<p>hatolik...</p>}>
-          <Outlet />
-        </Suspense>
+        <Outlet />
       </main>
       <footer>
         <Footer />
