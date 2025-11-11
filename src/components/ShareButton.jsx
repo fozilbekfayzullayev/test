@@ -1,6 +1,6 @@
 import { Share } from "@mui/icons-material";
 import { IconButton } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   FacebookShareButton,
   TelegramShareButton,
