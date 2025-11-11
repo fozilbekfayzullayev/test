@@ -6,7 +6,7 @@ const AcceptanceForm = () => {
   return (
     <section className="acceptance-page">
       <Container maxWidth="xl">
-        <Paper sx={{ px: 4, py: 3 }}>
+        <Paper sx={{ p: { xs: "40px 10px", md: "40px 30px" } }}>
           <Typography variant="pageHeading" mb={3}>
             Приём СОП – бакалавриат ТГЭУ-ПГУ
           </Typography>

@@ -35,7 +35,7 @@ const Partners = () => {
                 width: "100%",
                 background: theme.palette.primary.main,
                 padding: "20px 30px",
-                borderRadius: 1,
+                borderRadius: 8,
                 cursor: "pointer",
                 display: "flex",
                 justifyContent: "center",
