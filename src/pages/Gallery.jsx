@@ -33,13 +33,18 @@ const Gallery = () => {
               <PhotoCard
                 key={item.id}
                 photos={item}
-                imageHandler={() => imageHandler(item.img)}
+                imageHandler={() => imageHandler(gallery.indexOf(item))}
               />
             ))}
           </Stack>
         </Paper>
       </Container>
-      <Modal url={selectedImg} open={open} handleClose={handleClose} />
+      <Modal
+        images={gallery}
+        open={open}
+        startIndex={selectedImg}
+        handleClose={handleClose}
+      />
     </section>
   );
 };

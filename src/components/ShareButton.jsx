@@ -1,45 +1,65 @@
+import { Share } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import React, { useState } from "react";
 import {
   FacebookShareButton,
   TelegramShareButton,
   TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TelegramIcon,
+  TwitterIcon,
+  WhatsappIcon,
 } from "react-share";
-import { Stack } from "@mui/material";
-import { Facebook, Telegram, Twitter } from "@mui/icons-material";
 
-const ShareButton = ({ url, title }) => {
+const ShareMenu = () => {
+  const [open, setOpen] = useState(false);
+  const shareUrl = window.location.href;
+  const title = document.title;
+
+  const handleNativeShare = async () => {
+    const data = { title, text: "Check this out!", url: shareUrl };
+    if (navigator.share) {
+      try {
+        await navigator.share(data);
+      } catch (err) {
+        console.error("Share canceled or failed:", err);
+      }
+    } else {
+      setOpen(!open); // Agar brauzer qo‘llamasa, ijtimoiy tarmoqlar chiqsin
+    }
+  };
+
   return (
-    <Stack direction="row" spacing={2}>
-      <FacebookShareButton url={url} quote={title}>
-        <Facebook
-          sx={{
-            fontSize: { xs: 24, md: 36 },
-            transition: "color 0.3s ease",
-            "&:hover": { color: "rgba(18, 101, 225, 1)" },
-          }}
-        />
-      </FacebookShareButton>
+    <div className="relative inline-block">
+      <IconButton
+        onClick={handleNativeShare}
+        className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all"
+      >
+        <Share />
+      </IconButton>
 
-      <TelegramShareButton url={url} title={title}>
-        <Telegram
-          sx={{
-            fontSize: { xs: 24, md: 36 },
-            transition: "color 0.3s ease",
-            "&:hover": { color: "rgba(18, 101, 225, 1)" },
-          }}
-        />
-      </TelegramShareButton>
+      {open && (
+        <div className="absolute mt-2 flex gap-2 bg-white border shadow-md rounded-xl p-2">
+          <FacebookShareButton url={shareUrl} quote={title}>
+            <FacebookIcon size={40} round />
+          </FacebookShareButton>
 
-      <TwitterShareButton url={url} title={title}>
-        <Twitter
-          sx={{
-            fontSize: { xs: 24, md: 36 },
-            transition: "color 0.3s ease",
-            "&:hover": { color: "rgba(18, 101, 225, 1)" },
-          }}
-        />
-      </TwitterShareButton>
-    </Stack>
+          <TelegramShareButton url={shareUrl} title={title}>
+            <TelegramIcon size={40} round />
+          </TelegramShareButton>
+
+          <TwitterShareButton url={shareUrl} title={title}>
+            <TwitterIcon size={40} round />
+          </TwitterShareButton>
+
+          <WhatsappShareButton url={shareUrl} title={title}>
+            <WhatsappIcon size={40} round />
+          </WhatsappShareButton>
+        </div>
+      )}
+    </div>
   );
 };
 
-export default ShareButton;
+export default ShareMenu;
